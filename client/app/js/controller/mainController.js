@@ -3,4 +3,5 @@ angular.module("portfolio").controller("MainCtrl", function ($scope) {
         lastName: "Soler",
         firstName: "Cynthia"
     };
+
 });

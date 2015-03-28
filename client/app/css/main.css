@@ -5,17 +5,18 @@
     margin-right: 5%;
     margin-left: 5%;
 }
-.menu{
-    width: 300px;
-    height: 300px;
-    margin-top: 5%;
+
+.footer p{
+    text-align: center;
+    font-size: 0.8em;
+    margin: auto;
 }
 
-.menu.gauche{
-     margin-left: 30%;
+.footer p a, .footer p a:visited{
+    text-decoration: none;
+    color: inherit;
 }
 
-.menu.droite{
-    margin-left: 5%;
-    margin-right: 30%;
+.license{
+    margin-left: 20px;
 }
