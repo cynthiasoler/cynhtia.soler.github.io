@@ -6,6 +6,10 @@
     margin-left: 5%;
 }
 
+.menu, md-button{
+    text-align: center;
+}
+
 .footer p{
     text-align: center;
     font-size: 0.8em;
