@@ -1,0 +1,21 @@
+#identity{
+    margin-left: 5%;
+}
+#logo{
+    margin-right: 5%;
+    margin-left: 5%;
+}
+.menu{
+    width: 300px;
+    height: 300px;
+    margin-top: 5%;
+}
+
+.menu.gauche{
+     margin-left: 30%;
+}
+
+.menu.droite{
+    margin-left: 5%;
+    margin-right: 30%;
+}

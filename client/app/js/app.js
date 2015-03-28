@@ -1,1 +1,3 @@
-var app = angular.module("portfolio", []);
+var app = angular.module("portfolio", [
+    'ngMaterial'
+]);
