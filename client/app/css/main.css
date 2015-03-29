@@ -16,7 +16,7 @@
     margin: auto;
 }
 
-.footer p a, .footer p a:visited{
+.footer p a, .footer p a:visited, md-toolbar h1 a{
     text-decoration: none;
     color: inherit;
 }

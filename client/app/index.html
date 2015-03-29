@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="portfolio">
 <head lang="en">
-    <base href="/cynhtia.soler.github.io/client/app/index.html">
+    <base href="/cynhtia.soler.github.io/client/app/">
     <meta charset="UTF-8">
     <title>Portfolio de Cynthia Soler</title>
     <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css">
@@ -10,12 +10,11 @@
 <body ng-controller="MainCtrl" layout="column">
     <md-toolbar>
         <h1 id="identity">
-            {{identity.firstName}} {{identity.lastName}}
+            <a href="index.html">{{identity.firstName}} {{identity.lastName}}</a>
             <img src="#" alt="logo" id="logo"/>
         </h1>
     </md-toolbar>
-    <md-content ng-view layout="row" layout-sm="row" flex>
-    </md-content>
+    <md-content layout="row" layout-sm="row" flex ng-view> </md-content>
     <md-toolbar class="footer">
         <p>
             Développé par Edouard Souan /

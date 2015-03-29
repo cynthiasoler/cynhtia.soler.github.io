@@ -7,6 +7,4 @@ angular.module("portfolio").controller("MainCtrl", function ($scope, $route, $ro
         lastName: "Soler",
         firstName: "Cynthia"
     };
-
-    $scope.mainView = "view/main.html";
 });
