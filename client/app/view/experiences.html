@@ -1,1 +1,16 @@
-<p>{{exp}}</p>
+<div ng-controller="ExpCtrl">
+    <md-content>
+        <md-list>
+            <md-item ng-repeat="exp in exps">
+                <md-item-content>
+                    <div class="md-tile-content">
+                        <h3>{{exp.what}}</h3>
+                        <p>
+                            {{exp.notes}}
+                        </p>
+                    </div>
+                </md-item-content>
+            </md-item>
+        </md-list>
+    </md-content>
+</div>
