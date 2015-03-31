@@ -1,4 +1,4 @@
 .idea
-client/bower_components
-client/node_modules
+bower_components
+node_modules
 cynhtia.soler.github.io.iml
