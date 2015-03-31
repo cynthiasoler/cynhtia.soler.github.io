@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="portfolio">
+<head lang="en">
+    <base href="/">
+    <meta charset="UTF-8">
+    <title>Portfolio de Cynthia Soler</title>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="app/css/main.css">
+</head>
+<body ng-controller="MainCtrl" layout="column">
+    <md-toolbar>
+        <h1 id="identity">
+            <a href="index.html">{{identity.firstName}} {{identity.lastName}}</a>
+            <img src="#" alt="logo" id="logo"/>
+        </h1>
+    </md-toolbar>
+    <md-content layout="row" layout-sm="row" flex ng-view>
+
+    </md-content>
+    <md-toolbar class="footer">
+        <p>
+            Développé par Edouard Souan /
+            Tous droits réservés à C<a href="#">y</a>nthia Soler
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="license">
+                <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+            </a>
+        </p>
+    </md-toolbar>
+
+    <!-- Dependencies -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="app/js/app.js"></script>
+    <script src="app/js/controller/mainController.js"></script>
+    <script src="app/js/controller/experienceController.js"></script>
+    <script src="app/js/controller/portfolioController.js"></script>
+
+</body>
+</html>

@@ -6,9 +6,10 @@ var app = angular.module("portfolio", [
 
 app.config(['$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
-        .when('/', {templateUrl: '../view/main.html', controller: 'MainCtrl'})
-        .when('/experiences', {templateUrl: '../view/experiences.html', controller: 'ExpCtrl'})
-        .when('/portfolio', {templateUrl: '../view/portfolio.html', controller: 'PortfolioCtrl'});
+        .when('/', {templateUrl: 'app/view/main.html', controller: 'MainCtrl'})
+        .when('/experiences', {templateUrl: 'app/view/experiences.html', controller: 'ExpCtrl'})
+        .when('/portfolio', {templateUrl: 'app/view/portfolio.html', controller: 'PortfolioCtrl'})
+        .otherwise({redirectTo: 'index.html'});
 
     $locationProvider.html5Mode(true);
 }]);
