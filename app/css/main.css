@@ -1,0 +1,26 @@
+#identity{
+    margin-left: 5%;
+}
+#logo{
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.menu, md-button{
+    text-align: center;
+}
+
+.footer p{
+    text-align: center;
+    font-size: 0.8em;
+    margin: auto;
+}
+
+.footer p a, .footer p a:visited, md-toolbar h1 a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.license{
+    margin-left: 20px;
+}
