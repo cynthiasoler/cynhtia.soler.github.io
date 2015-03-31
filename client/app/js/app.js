@@ -9,7 +9,7 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
         .when('/', {templateUrl: 'app/view/main.html', controller: 'MainCtrl'})
         .when('/experiences', {templateUrl: 'app/view/experiences.html', controller: 'ExpCtrl'})
         .when('/portfolio', {templateUrl: 'app/view/portfolio.html', controller: 'PortfolioCtrl'})
-        .otherwise({redirectTo: 'index.html'});
+        .otherwise({redirectTo: '/'});
 
     $locationProvider.html5Mode(true);
 }]);
