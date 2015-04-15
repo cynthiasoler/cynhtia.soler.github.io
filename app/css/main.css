@@ -21,6 +21,21 @@
     color: inherit;
 }
 
+.circle{
+    border: solid 2px black;
+    width: 250px;
+    height: 250px;
+    border-radius: 100%;
+    text-align: center;
+    margin-left: 5%;
+
+}
+
 .license{
     margin-left: 20px;
+}
+
+table{
+    margin-top: 2%;
+    margin-left: 23%;
 }

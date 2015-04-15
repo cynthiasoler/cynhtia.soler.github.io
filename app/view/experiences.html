@@ -1,16 +1,22 @@
 <div ng-controller="ExpCtrl">
     <md-content>
         <md-list>
-            <md-item ng-repeat="exp in exps">
-                <md-item-content flex>
-                    <div class="md-tile-content md-primary md-raised">
-                        <h3>{{exp.what}}</h3>
-                        <p>
-                            {{exp.notes}}
-                        </p>
-                    </div>
-                </md-item-content>
-            </md-item>
+            <table>
+                <md-item>
+                    <tr ng-repeat=" row in exps">
+                        <td ng-repeat="exp in row">
+                            <md-item-content flex>
+                                    <div class="md-tile-content md-primary md-raised circle">
+                                        <h3>{{exp.what}}</h3>
+                                        <p>
+                                            {{exp.notes}}
+                                        </p>
+                                    </div>
+                            </md-item-content>
+                        </td>
+                    </tr>
+                </md-item>
+            </table>
         </md-list>
     </md-content>
 </div>

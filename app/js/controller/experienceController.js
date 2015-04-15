@@ -1,25 +1,24 @@
 angular.module('portfolio').controller('ExpCtrl', function ($scope, $routeParams) {
-    $scope.exps = [{
+    $scope.exps = [[{
         what: 'team Work',
         notes: 'Sometimes it was hard'
     },{
         what: 'ijrvbeqlihvbe',
-        notes: 'jvbvhbtihb'
+        notes: 'jvbvhbtihb zirverhvbrihvbr, ' +
+        'rverbhvbekvuq ebvaeivyerv, rfxbiar'
     },{
         what: 'ijrvbeqlihvbe',
         notes: 'jvbvhbtihb'
-    },{
-        what: 'ijrvbeqlihvbe',
-        notes: 'jvbvhbtihb'
-    },{
-        what: 'ijrvbeqlihvbe',
-        notes: 'jvbvhbtihb'
-    },{
-        what: 'ijrvbeqlihvbe',
-        notes: 'jvbvhbtihb'
-    },{
-        what: 'ijrvbeqlihvbe',
-        notes: 'jvbvhbtihb'
-    }
-    ];
+    }],
+        [{
+            what: 'team Work',
+            notes: 'Sometimes it was hard'
+        },{
+            what: 'ijrvbeqlihvbe',
+            notes: 'jvbvhbtihb zirverhvbrihvbr, ' +
+            'rverbhvbekvuq ebvaeivyerv, rfxbiar'
+        },{
+            what: 'ijrvbeqlihvbe',
+            notes: 'jvbvhbtihb'
+        }]];
 });
