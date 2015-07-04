@@ -26,6 +26,7 @@
     "postinstall": "npm clean && npm install && gulp serve",
     "clean": "rm -rf node_modules && npm install --quiet --production"
   },
+  "engine":"node 0.12.0",
   "author": "",
   "license": "ISC"
 }
