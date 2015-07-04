@@ -23,8 +23,7 @@
   },
   "scripts": {
     "start": " node server.js",
-    "postinstall": "npm clean && npm install && gulp serve",
-    "clean": "rm -rf node_modules"
+    "postinstall": "npm install && gulp serve"
   },
   "author": "",
   "license": "ISC"
