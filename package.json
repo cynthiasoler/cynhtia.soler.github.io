@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "postinstall": "bower install && gulp serve"
+    "postinstall": "npm install && gulp serve"
   },
   "author": "",
   "license": "ISC"
