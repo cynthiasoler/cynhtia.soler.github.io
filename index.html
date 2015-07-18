@@ -4,8 +4,10 @@
     <base href="/">
     <meta charset="UTF-8">
     <title>Portfolio de Cynthia Soler</title>
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
-    <link rel="stylesheet" href="app/css/main.css">
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/app/css/login.css">
+    <link rel="stylesheet" href="/app/css/main.css">
+    <!-- endinject -->
 </head>
 <body ng-controller="MainCtrl" layout="column">
     <md-toolbar>
@@ -20,23 +22,24 @@
     <md-toolbar class="footer">
         <p>
             Développé par Edouard Souan /
-            Tous droits réservés à C<a href="#">y</a>nthia Soler
+            Tous droits réservés à C<a href="/admin">y</a>nthia Soler
             <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="license">
                 <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
             </a>
         </p>
     </md-toolbar>
 
-    <!-- Dependencies -->
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-material/angular-material.js"></script>
-    <script src="bower_components/angular-route/angular-route.min.js"></script>
-    <script src="app/js/app.js"></script>
-    <script src="app/js/controller/mainController.js"></script>
-    <script src="app/js/controller/experienceController.js"></script>
-    <script src="app/js/controller/portfolioController.js"></script>
+    <!-- inject:js -->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/app/js/app.js"></script>
+    <script src="/app/js/controller/experienceController.js"></script>
+    <script src="/app/js/controller/mainController.js"></script>
+    <script src="/app/js/controller/portfolioController.js"></script>
+    <!-- endinject -->
 
 </body>
 </html>
