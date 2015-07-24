@@ -3,5 +3,7 @@ var router = express.Router();
 var experienceController = require('../controller/experienceController.js');
 
 router.get('/experiences', experienceController.getAll);
+router.get('/experiences/:id', experienceController.getOne);
+router.post('/experiences/add', experienceController.addExperience);
 
 module.exports = router;

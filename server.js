@@ -2,10 +2,12 @@ var express = require('express');
 var router = require('./server/router/mainRouter.js');
 var mongoose = require('mongoose');
 var Constants = require('./server/constants.json');
+var bodyParser = require('body-parser')
 
 app = express();
 mongoose.connect(Constants.mongoDB);
 
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(__dirname));
 app.get('/', function(req, res) {
     res.sendfile('index.html', {root: __dirname});
