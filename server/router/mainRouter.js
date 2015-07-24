@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var experienceRouter = require('./experienceRouter.js');
+var experienceController = require('../controller/experienceController.js');
 
-router.use('/experiences', experienceRouter.getAll());
-router.use('/experiences/add', experienceRouter.add());
+router.get('/experiences', experienceController.getAll);
 
 module.exports = router;

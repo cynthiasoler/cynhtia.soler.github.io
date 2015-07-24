@@ -1,7 +1,7 @@
 var express = require('express');
 var router = require('./server/router/mainRouter.js');
 var mongoose = require('mongoose');
-var Constants = require('../constants.json');
+var Constants = require('./server/constants.json');
 
 app = express();
 mongoose.connect(Constants.mongoDB);
@@ -11,10 +11,6 @@ app.get('/', function(req, res) {
     res.sendfile('index.html', {root: __dirname});
 });
 app.use('/api', router);
-
-/*app.get('/experiences', function (req, res) {
-    res.sendfile('index.html', {root: __dirname});
-});*/
 
 app.all('/*', function (req, res) {
     res.set('Content-Type', 'application/html')
