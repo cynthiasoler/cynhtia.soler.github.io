@@ -9,23 +9,24 @@ var gulp        = require('gulp'),
     gulpif      = require('gulp-if'),
     browserSync = require('browser-sync'),
     inject      = require('gulp-inject'),
-    reload      = browserSync.reload;
+    reload      = browserSync.reload,
+    modrewrite = require('connect-modrewrite');
 
-gulp.task('default', ['clean','index' ,'server'], function () {
+gulp.task('default', ['clean', 'public', 'serve'], function () {
     return gulp.watch([
         '*.js', 'app/*.js', '*.html', 'app/css/*.css'
-    ], ['js', reload
-    ]);
+    ], reload);
 });
 
 gulp.task('clean', function() {
-    del(['./dist']);
+    del(['./public']);
 });
 
-gulp.task('cssmin', function () {
-    return gulp.src('app/css/*.css')
-        .pipe(cssmin())
-        .pipe(gulp.dest('index.html'));
+gulp.task('css', function () {
+    var target = gulp.src('./index.html');
+    var sources = gulp.src(['app/css/*.css', './bower_components/angular-material/angular-material.css']);
+    return target.pipe(inject(sources))
+        .pipe(gulp.dest('./public'));
 });
 
 gulp.task('index', function () {
@@ -40,18 +41,29 @@ gulp.task('index', function () {
         ,'./app/**/*.js']);
 
     return target.pipe(inject(sources))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./public'));
 });
 
-gulp.task('server', function() {
-    browserSync({server: {baseDir: './'}});
+gulp.task('public',['index', 'css'], function() {
+    gulp.src('./app/css/**/*.css').pipe(gulp.dest('./public/app/css'));
+    gulp.src('./app/js/**/*.js').pipe(gulp.dest('./public/app/js'));
+    gulp.src('./app/views/**/*.html').pipe(gulp.dest('./public/app/views'));
 });
 
-gulp.task('js:min', function() {
-    return gulp.src(['app/**/*.js', 'app/templates/*.html'])
-        .pipe(gulpif(/\.html$/, htmlmin({ collapseWhitespace: true })))
-        .pipe(gulpif(/\.html$/, ngTemplates()))
-        .pipe(uglify({ mangle: false }))
-        .pipe(concat('app.js'))
-        .pipe(gulp.dest('dist'));
+gulp.task('serve', function() {
+    browserSync.init(null, {
+        server: {
+            baseDir: '/',
+            middleware: [
+                modrewrite([
+                    '!\\.\\w+$ /index.html [L]'
+                ])
+            ]
+        }
+    });
+
+    gulp.watch(['app/**/*.html'], reload);
+    gulp.watch(['app/css/**/*.css'], ['styles', reload]);
+    gulp.watch(['app/js/**/*.js'], reload);
+    //gulp.watch(['app/images/**/*'], reload);
 });

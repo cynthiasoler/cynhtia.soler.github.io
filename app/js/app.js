@@ -6,11 +6,11 @@ var app = angular.module("portfolio", [
 
 app.config(['$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
-        .when('/', {templateUrl: 'app/view/main.html', controller: 'MainCtrl'})
-        .when('/experiences', {templateUrl: 'app/view/experiences.html', controller: 'ExpCtrl'})
-        .when('/portfolio', {templateUrl: 'app/view/portfolio.html', controller: 'PortfolioCtrl'})
-        .when('/admin',{templateUrl: 'app/view/login.html', controller: 'LoginCtrl'})
+        .when('/', {templateUrl: 'app/views/main.html', controller: 'MainCtrl'})
+        .when('/experiences', {templateUrl: 'app/views/experiences.html', controller: 'ExpCtrl'})
+        .when('/portfolio', {templateUrl: 'app/views/portfolio.html', controller: 'PortfolioCtrl'})
+        .when('/admin',{templateUrl: 'app/views/login.html', controller: 'LoginCtrl'})
         .otherwise({redirectTo: '/'});
 
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true).hashPrefix('!');
 }]);

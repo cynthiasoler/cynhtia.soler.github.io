@@ -1,4 +1,4 @@
-angular.module('portfolio').controller('ExpCtrl', [$scope, $routeParams, function ($scope, $routeParams) {
+angular.module('portfolio').controller('ExpCtrl', function ($scope, $routeParams) {
     $scope.exps = [[{
         what: 'team Work',
         notes: 'Sometimes it was hard'
@@ -10,4 +10,4 @@ angular.module('portfolio').controller('ExpCtrl', [$scope, $routeParams, functio
         what: 'ijrvbeqlihvbe',
         notes: 'jvbvhbtihb'
     }]];
-}]);
+});
