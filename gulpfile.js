@@ -53,7 +53,7 @@ gulp.task('public',['index', 'css'], function() {
 gulp.task('serve', function() {
     browserSync.init(null, {
         server: {
-            baseDir: '/',
+            baseDir: '/public',
             middleware: [
                 modrewrite([
                     '!\\.\\w+$ /index.html [L]'
