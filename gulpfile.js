@@ -1,69 +1,72 @@
 var gulp        = require('gulp'),
-    del         = require('del'),
     run         = require('gulp-run'),
-    htmlmin     = require('gulp-htmlmin'),
-    ngTemplates = require('gulp-ng-templates'),
-    cssmin      = require('gulp-minify-css'),
-    uglify      = require('gulp-uglify'),
+    cssmin      = require('gulp-cssmin'),
     concat      = require('gulp-concat'),
-    gulpif      = require('gulp-if'),
-    browserSync = require('browser-sync'),
+    concatCss   = require('gulp-concat-css'),
+    uglify      = require('gulp-uglify'),
     inject      = require('gulp-inject'),
+    browserSync = require('browser-sync'),
     reload      = browserSync.reload,
-    modrewrite = require('connect-modrewrite');
+    modrewrite = require('connect-modrewrite'),
+    nodemon = require('gulp-nodemon'),
+    rename = require('gulp-rename');
 
 gulp.task('default', ['clean', 'public', 'serve'], function () {
-    return gulp.watch([
-        '*.js', 'app/*.js', '*.html', 'app/css/*.css'
-    ], reload);
+    return gulp.watch('public', reload);
 });
 
 gulp.task('clean', function() {
-    del(['./public']);
+    run('rm public', function(){
+      console.log('directory deleted');
+    });
 });
 
-gulp.task('css', function () {
+gulp.task('mincss', function () {
     var target = gulp.src('./index.html');
-    var sources = gulp.src(['app/css/*.css', './bower_components/angular-material/angular-material.css']);
-    return target.pipe(inject(sources))
-        .pipe(gulp.dest('./public'));
+    gulp.src(['app/css/*.css', './bower_components/angular-material/angular-material.css'])
+    .pipe(concatCss('app.css'))
+    .pipe(cssmin())
+    .pipe(rename('app.min.css'))
+    .pipe(gulp.dest('./public/css'));
+
+    var source = gulp.src('./public/css/*.css');
+    return target.pipe(inject(source)).pipe(gulp.dest('./public'));
 });
 
-gulp.task('index', function () {
+gulp.task('minjs', function () {
     var target = gulp.src('./index.html');
     var bowerPath = './bower_components';
-    var sources = gulp.src([
+    gulp.src([
         bowerPath+'/angular/angular.js'
         ,bowerPath+'/angular-aria/angular-aria.js'
         ,bowerPath+'/angular-animate/angular-animate.js'
         ,bowerPath+'/angular-material/angular-material.js'
         ,bowerPath+'/angular-route/angular-route.js'
-        ,'./app/**/*.js']);
+        ,'./app/**/*.js'])
+        .pipe(concat('app.js'))
+        .pipe(uglify())
+        .pipe(rename('app.min.js'))
+        .pipe(gulp.dest('./public/js'));
 
-    return target.pipe(inject(sources))
-        .pipe(gulp.dest('./public'));
+    var source = gulp.src('./public/js/*.js');
+    return target.pipe(inject(source)).pipe(gulp.dest('./public'));
 });
 
-gulp.task('public',['index', 'css'], function() {
-    gulp.src('./app/css/**/*.css').pipe(gulp.dest('./public/app/css'));
-    gulp.src('./app/js/**/*.js').pipe(gulp.dest('./public/app/js'));
-    gulp.src('./app/views/**/*.html').pipe(gulp.dest('./public/app/views'));
+gulp.task('public',['minjs', 'mincss'], function() {
+    gulp.src('./app/views/**/*.html').pipe(gulp.dest('./public/views'));
 });
 
-gulp.task('serve', function() {
-    browserSync.init(null, {
-        server: {
-            baseDir: '/',
-            middleware: [
-                modrewrite([
-                    '!\\.\\w+$ /index.html [L]'
-                ])
-            ]
-        }
-    });
+gulp.task('server', function () {
+  nodemon({
+    script: 'server.js'
+  , ext: 'js html'
+  , env: { 'NODE_ENV': 'development' }
+  })
+    .on('restart', function () {
+    console.log('restarted!')
+  })
+})
 
-    gulp.watch(['app/**/*.html'], reload);
-    gulp.watch(['app/css/**/*.css'], ['styles', reload]);
-    gulp.watch(['app/js/**/*.js'], reload);
-    //gulp.watch(['app/images/**/*'], reload);
+gulp.task('serve', ['server'], function() {
+    browserSync({server: {baseDir: './public'}});
 });
