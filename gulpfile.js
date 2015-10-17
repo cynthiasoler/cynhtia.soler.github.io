@@ -16,9 +16,7 @@ gulp.task('default', ['clean', 'public', 'serve'], function () {
 });
 
 gulp.task('clean', function() {
-    run('rm public', function(){
-      console.log('directory deleted');
-    });
+    run('rm public');
 });
 
 gulp.task('mincss', function () {
@@ -56,36 +54,14 @@ gulp.task('public',['minjs', 'mincss'], function() {
     gulp.src('./app/views/**/*.html').pipe(gulp.dest('./public/views'));
 });
 
-<<<<<<< HEAD
 gulp.task('serve', function() {
     browserSync.init(null, {
         server: {
-            baseDir: '/public',
-            middleware: [
-                modrewrite([
-                    '!\\.\\w+$ /index.html [L]'
-                ])
-            ]
+            baseDir: './public'
         }
     });
 
     gulp.watch(['app/**/*.html'], reload);
     gulp.watch(['app/css/**/*.css'], ['styles', reload]);
     gulp.watch(['app/js/**/*.js'], reload);
-    //gulp.watch(['app/images/**/*'], reload);
-=======
-gulp.task('server', function () {
-  nodemon({
-    script: 'server.js'
-  , ext: 'js html'
-  , env: { 'NODE_ENV': 'development' }
-  })
-    .on('restart', function () {
-    console.log('restarted!')
-  })
-})
-
-gulp.task('serve', ['server'], function() {
-    browserSync({server: {baseDir: './public'}});
->>>>>>> ca6ec8e40340126e51178bee360fb03838e21917
 });
