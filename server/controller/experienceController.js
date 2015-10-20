@@ -25,3 +25,13 @@ exports.addExperience = function(req, res) {
     });
     res.status(201).send('Created');
 };
+
+exports.deleteExperienceByID = function(req, res){
+  Experience.findById(req.params.id, function(err, exp){
+    if(err) return err;
+    Experience.remove(function(err){
+      if(err) return err;
+    });
+    res.status(204).send('Deleted');
+  });
+};
