@@ -26,6 +26,18 @@ exports.addExperience = function(req, res) {
     res.status(201).send('Created');
 };
 
+exports.updateExperience = function(req, res){
+  Experience.findById(req.params.id, function(err, exp){
+    if(err) return err;
+    exp.title = req.body.title ? req.params.title : exp.title;
+    exp.description = req.body.description ? req.body.description : exp.description;
+    exp.save(function(err, res){
+      if(err){return res.status(500).json(err)};
+    });
+    res.status(200).send('Updated');
+  });
+};
+
 exports.deleteExperienceByID = function(req, res){
   Experience.findById(req.params.id, function(err, exp){
     if(err) return err;
