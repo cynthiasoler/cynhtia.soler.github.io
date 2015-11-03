@@ -1,5 +1,5 @@
 var gulp        = require('gulp'),
-    run         = require('gulp-run'),
+    del         = require('del'),
     cssmin      = require('gulp-cssmin'),
     concat      = require('gulp-concat'),
     concatCss   = require('gulp-concat-css'),
@@ -7,28 +7,31 @@ var gulp        = require('gulp'),
     inject      = require('gulp-inject'),
     browserSync = require('browser-sync'),
     reload      = browserSync.reload,
-    modrewrite = require('connect-modrewrite'),
-    nodemon = require('gulp-nodemon'),
-    rename = require('gulp-rename');
+    modrewrite  = require('connect-modrewrite'),
+    nodemon     = require('gulp-nodemon'),
+    rename      = require('gulp-rename');
 
-gulp.task('default', ['clean', 'public', 'serve'], function () {
-    return gulp.watch('public', reload);
+gulp.task('default', ['clean','public', 'serve'], function () {
+  return gulp.watch('./public', reload);
 });
 
 gulp.task('clean', function() {
-    run('rm public');
+    del('public/*');
 });
 
 gulp.task('mincss', function () {
     var target = gulp.src('./index.html');
-    gulp.src(['app/css/*.css', './bower_components/angular-material/angular-material.css'])
+    gulp.src(['./app/css/*.css'])
     .pipe(concatCss('app.css'))
     .pipe(cssmin())
     .pipe(rename('app.min.css'))
-    .pipe(gulp.dest('./public/css'));
+    .pipe(gulp.dest('./public/app/css'));
 
-    var source = gulp.src('./public/css/*.css');
-    return target.pipe(inject(source)).pipe(gulp.dest('./public'));
+    gulp.src(['./bower_components/bootstrap/dist/css/bootstrap.min.css'])
+    .pipe(gulp.dest('./public/app/css'));
+
+    var source = gulp.src('./app/css/*.min.css', {read: false});
+    return target.pipe(inject(source)).pipe(gulp.dest('./'));
 });
 
 gulp.task('minjs', function () {
@@ -40,18 +43,19 @@ gulp.task('minjs', function () {
         ,bowerPath+'/angular-animate/angular-animate.js'
         ,bowerPath+'/angular-material/angular-material.js'
         ,bowerPath+'/angular-route/angular-route.js'
-        ,'./app/**/*.js'])
+        ,'./app/js/*.js'])
         .pipe(concat('app.js'))
         .pipe(uglify())
         .pipe(rename('app.min.js'))
-        .pipe(gulp.dest('./public/js'));
+        .pipe(gulp.dest('./public/app/js'));
 
-    var source = gulp.src('./public/js/*.js');
-    return target.pipe(inject(source)).pipe(gulp.dest('./public'));
+    var source = gulp.src('./app/js/app.min.js', {read: false});
+    return target.pipe(inject(source)).pipe(gulp.dest('./'));
 });
 
 gulp.task('public',['minjs', 'mincss'], function() {
-    gulp.src('./app/views/**/*.html').pipe(gulp.dest('./public/views'));
+    gulp.src('./app/views/**/*.html').pipe(gulp.dest('./public/app/views'));
+    gulp.src('./index.html').pipe(gulp.dest('./public'));
 });
 
 gulp.task('serve', function() {
@@ -60,8 +64,7 @@ gulp.task('serve', function() {
             baseDir: './public'
         }
     });
-
-    gulp.watch(['app/**/*.html'], reload);
-    gulp.watch(['app/css/**/*.css'], ['styles', reload]);
+    gulp.watch(['app/views/**/*.html'], reload);
+    gulp.watch(['app/css/**/*.css'], reload);
     gulp.watch(['app/js/**/*.js'], reload);
 });
