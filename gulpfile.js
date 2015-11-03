@@ -5,15 +5,12 @@ var gulp        = require('gulp'),
     concatCss   = require('gulp-concat-css'),
     uglify      = require('gulp-uglify'),
     inject      = require('gulp-inject'),
-    browserSync = require('browser-sync'),
-    reload      = browserSync.reload,
+    browserSync = require('browser-sync').create(),
     modrewrite  = require('connect-modrewrite'),
     nodemon     = require('gulp-nodemon'),
     rename      = require('gulp-rename');
 
-gulp.task('default', ['clean','public', 'serve'], function () {
-  return gulp.watch('./public', reload);
-});
+gulp.task('default', ['clean','public', 'serve']);
 
 gulp.task('clean', function() {
     del('public/*');
@@ -59,12 +56,9 @@ gulp.task('public',['minjs', 'mincss'], function() {
 });
 
 gulp.task('serve', function() {
-    browserSync.init(null, {
+    browserSync.init({
         server: {
             baseDir: './public'
         }
     });
-    gulp.watch(['app/views/**/*.html'], reload);
-    gulp.watch(['app/css/**/*.css'], reload);
-    gulp.watch(['app/js/**/*.js'], reload);
 });

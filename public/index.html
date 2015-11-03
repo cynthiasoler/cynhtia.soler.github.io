@@ -12,13 +12,15 @@
 <body ng-controller="MainCtrl" layout="column">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Cynthia Soler</a>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
   </nav>
-  <!-- inject:js -->
+  <div ng-view class="content">
+  </div>
+
+    <!-- inject:js -->
     <script src="/app/js/app.min.js"></script>
     <!-- endinject -->
 </body>

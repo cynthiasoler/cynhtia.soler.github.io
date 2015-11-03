@@ -6,18 +6,19 @@
     <title>Portfolio de Cynthia Soler</title>
     <!-- inject:css -->
     <link rel="stylesheet" href="/app/css/app.min.css">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/app/css/bootstrap.min.css">
     <!-- endinject -->
 </head>
 <body ng-controller="MainCtrl" layout="column">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Cynthia Soler</a>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
   </nav>
+  <div ng-view class="content">
+  </div>
 
     <!-- inject:js -->
     <script src="/app/js/app.min.js"></script>
