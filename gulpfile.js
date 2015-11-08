@@ -10,7 +10,7 @@ var gulp        = require('gulp'),
     nodemon     = require('gulp-nodemon'),
     rename      = require('gulp-rename');
 
-gulp.task('default', ['clean','public', 'serve']);
+gulp.task('default', ['serve']);
 
 gulp.task('clean', function() {
     del('public/*');
@@ -20,11 +20,8 @@ gulp.task('mincss', function () {
     var target = gulp.src('./index.html');
     gulp.src(['./app/css/*.css'])
     .pipe(concatCss('app.css'))
-    .pipe(cssmin())
+    //.pipe(cssmin())
     .pipe(rename('app.min.css'))
-    .pipe(gulp.dest('./public/app/css'));
-
-    gulp.src(['./bower_components/bootstrap/dist/css/bootstrap.min.css'])
     .pipe(gulp.dest('./public/app/css'));
 
     var source = gulp.src('./app/css/*.min.css', {read: false});
@@ -42,7 +39,7 @@ gulp.task('minjs', function () {
         ,bowerPath+'/angular-route/angular-route.js'
         ,'./app/js/*.js'])
         .pipe(concat('app.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(rename('app.min.js'))
         .pipe(gulp.dest('./public/app/js'));
 
@@ -55,10 +52,14 @@ gulp.task('public',['minjs', 'mincss'], function() {
     gulp.src('./index.html').pipe(gulp.dest('./public'));
 });
 
-gulp.task('serve', function() {
+gulp.task('serve', ['clean', 'public'], function() {
     browserSync.init({
         server: {
             baseDir: './public'
         }
     });
+
+    gulp.watch(["app/js/controller/*.js", "app/js/*.min.js"], browserSync.reload);
+    gulp.watch(["app/css/*.min.css"], browserSync.reload);
+    gulp.watch(["app/views/*.html"], browserSync.reload);
 });
